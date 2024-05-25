@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>
+			Bun x WebSocket
+		</title>
+
+		<script type="module">
+			console.log('Opening connection...')
+			const socket = new WebSocket('ws://localhost:3030')
+			socket.addEventListener('message', event => {
+				console.log(JSON.parse(event.data))
+			})
+			socket.addEventListener('open', () => {
+				socket.send(JSON.stringify({type: 'ping_pong'}))
+			})
+			socket.addEventListener('close', () => {
+				console.log('Socket closed.')
+			})
+		</script>
+	</head>
+</html>
